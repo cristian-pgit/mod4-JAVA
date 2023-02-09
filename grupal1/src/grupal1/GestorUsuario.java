@@ -11,6 +11,7 @@ public class GestorUsuario {
 		String apellido=null;
 		int rut=0;
 		long telefono=0;
+		String Edad =null;
 		
 		System.out.println("Ingresar RUT:");
 		ingresarRut();
@@ -43,7 +44,8 @@ public class GestorUsuario {
 		String comuna = pr.nextLine();
 		
 		System.out.println("Ingresar Edad:");
-		String vEdad = pr.nextLine();
+		ingresarEdad();
+		/*String vEdad = pr.nextLine();
 		int edad =Integer.parseInt(vEdad);
 		int ok = 0;
 		while (ok == 1) {
@@ -52,7 +54,7 @@ public class GestorUsuario {
 			vEdad = pr.nextLine();
 			edad =Integer.parseInt(vEdad);
 		} else {ok = 1;}
-		}
+		}*/
 		
 		
 		String sisSalud;
@@ -66,7 +68,7 @@ public class GestorUsuario {
 		}
 		
 		
-		System.out.println("Hola,"+nombre+" "+apellido+" tu Rut es:"+rut+" tienes:"+edad+" anos"+" "+"tu telefono es:"+telefono);
+		System.out.println("Hola,"+nombre+" "+apellido+" tu Rut es:"+rut+" tienes:"+Edad+" anos"+" "+"tu telefono es:"+telefono);
 		System.out.println("Vives en: "+direccion+" "+" en la comuna de:"+comuna);
 		
 		System.out.println("Tu AFP es: "+afp+" "+"y tu sistema de salud es: "+sisSalud);
@@ -156,13 +158,30 @@ public class GestorUsuario {
 				Scanner pr = new Scanner(System.in);
 				afp = pr.nextLine();
 				if(afp == null || afp.equals("")) {
-					System.out.println("Apellido no puede estar vacio");
-					System.out.println("Ingresar Apellido:");
+					System.out.println("Afp no puede estar vacio");
+					System.out.println("Ingresar Afp:");
 				} else { 
 					
 					ok = true;}
 			}
 			return afp;}
+		
+		
+		//ingresar edad
+		public static String ingresarEdad() {
+			boolean ok = false;
+			String Edad = null;
+			while ( ok == false) {
+				Scanner pr = new Scanner(System.in);
+				int vEdad = pr.nextInt();
+				if(vEdad >119) {
+					System.out.println("Edad no puede estar vacio, no puede ser superior a 120");
+					System.out.println("Ingresar Telefono:");
+				} else {
+					
+					ok = true;}
+			}
+			return Edad;}
 			
 			
 			
