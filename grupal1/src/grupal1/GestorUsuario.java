@@ -6,15 +6,7 @@ import java.util.Scanner;
 public class GestorUsuario {
 	public static void main (String[]Args) throws IOException {
 		
-		//String rut;
-		//String nombre;
-		//String apellido;
-		//int telefono;
-		//String afp;
-		//int sistemaSalud;
-		//String direccion;
-		//String comuna;
-		//int edad;
+		String nombre = null;
 		
 		Scanner pr = new Scanner(System.in);
 		
@@ -22,7 +14,16 @@ public class GestorUsuario {
 		String rut = pr.nextLine();
 		
 		System.out.println("Ingresar Nombre:");
-		String nombre = pr.nextLine();
+		int ok = 1;
+		while ( ok == 0) {
+			nombre = pr.nextLine();
+			if(nombre == null && nombre.equals("")) {
+				pr.nextLine();
+			} else { 
+				nombre = pr.nextLine();
+				ok = 1;}
+		}
+		//String nombre = pr.nextLine();
 		
 		System.out.println("Ingresar Apellido:");
 		String apellido = pr.nextLine();
@@ -68,6 +69,39 @@ public class GestorUsuario {
 		
 		
 		
+		
 	}
+	//ingresar Nombre
+	public static String ingresarNombre() {
+		boolean ok = false;
+		String nombre = null;
+		while ( ok = false) {
+			Scanner pr = new Scanner(System.in);
+			nombre = pr.nextLine();
+			if(nombre == null && nombre.equals("")) {
+				pr.nextLine();
+			} else { 
+				nombre = pr.nextLine();
+				ok = true;}
+		}
+		return nombre;}
+				
+				
+			
+			
+			
+			
+			
+			private static boolean isNumeric(String cadena){
+				try {
+					Integer.parseInt(cadena);
+					return true;
+				} catch (NumberFormatException nfe){
+					return false;
+				}
+			};
+			
+			
+			// 
 
 }
