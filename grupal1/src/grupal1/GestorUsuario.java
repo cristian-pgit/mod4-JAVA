@@ -1,65 +1,51 @@
 package grupal1;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GestorUsuario {
+	
 	public static void main (String[]Args) throws IOException {
 		
-		Scanner pr = new Scanner(System.in);
+		int rut=0;
 		String nombre=null;
 		String apellido=null;
-		int rut=0;
-		long telefono=0;
-		String Edad =null;
+		String telefono=null;
+		int edad = 0;
+		String afp =null;
+		int sistemaSalud;
+		String direccion = null;
+		String comuna = null;
 		
-		System.out.println("Ingresar RUT:");
-		ingresarRut();
-		//String rut = pr.nextLine();
+		System.out.print("Ingresar RUT:");
+		rut = ingresarRut();
+				
+		System.out.print("Ingresar Nombre:");
+		nombre = ingresarNombre();
 		
-		System.out.println("Ingresar Nombre:");
-		ingresarNombre();
-		//String nombre = pr.nextLine();
+		System.out.print("Ingresar Apellido:");
+		apellido = ingresarApellido();
 		
-		System.out.println("Ingresar Apellido:");
-		ingresarApellido();
-		//String apellido = pr.nextLine();
+		System.out.print("Ingresar Fono:");
+		telefono = ingresarTelefono();
 		
-		System.out.println("Ingresar Fono:");
-		ingresarTelefono();
-		/*String Fono = pr.nextLine();
-		int telefono = Integer.parseInt(Fono);*/
+		System.out.print("Ingresar AFP:");
+		afp = ingresarAfp();
 		
-		System.out.println("Ingresar AFP:");
-		String afp = pr.nextLine();
+		System.out.print("Ingresar Sistema de Salud:");
+		sistemaSalud = ingresarSisSal();
 		
-		System.out.println("Ingresar Sistema de Salud:");
-		String eSS = pr.nextLine();
-		int sistemaSalud = Integer.parseInt(eSS);
+		System.out.print("Ingresar Direccion:");
+		direccion = ingresarDireccion();
 		
-		System.out.println("Ingresar Direccion:");
-		String direccion = pr.nextLine();
+		System.out.print("Ingresar Comuna:");
+		comuna = ingresarComuna();
 		
-		System.out.println("Ingresar Comuna:");
-		String comuna = pr.nextLine();
-		
-		System.out.println("Ingresar Edad:");
-		ingresarEdad();
-		/*String vEdad = pr.nextLine();
-		int edad =Integer.parseInt(vEdad);
-		int ok = 0;
-		while (ok == 1) {
-			if (edad > 119) {
-			System.out.println("No puede ser mayor a 120, ingrese nuevamente:");
-			vEdad = pr.nextLine();
-			edad =Integer.parseInt(vEdad);
-		} else {ok = 1;}
-		}*/
-		
+		System.out.print("Ingresar Edad:");
+		edad = ingresarEdad();
 		
 		String sisSalud;
-			
-		
 		
 		if (sistemaSalud == 1) {
 			sisSalud = "Fonasa";
@@ -67,34 +53,41 @@ public class GestorUsuario {
 			sisSalud = "Isapre";
 		}
 		
+		System.out.println(" ");
+		System.out.print("***Procesando***");
+		System.out.println(" ");
 		
-		System.out.println("Hola,"+nombre+" "+apellido+" tu Rut es:"+rut+" tienes:"+Edad+" anos"+" "+"tu telefono es:"+telefono);
-		System.out.println("Vives en: "+direccion+" "+" en la comuna de:"+comuna);
+		System.out.println("Hola, "+nombre+" "+apellido+" tu Rut es: "+rut+" tienes: "+edad+" años "+"tu telefono es: "+telefono);
+		System.out.println("Vives en: "+direccion+", en la comuna de: "+comuna);
 		
 		System.out.println("Tu AFP es: "+afp+" "+"y tu sistema de salud es: "+sisSalud);
 		
-		
-		
-		
-		
-		
-		
 	}
 	// validar rut
+	
 	public static int ingresarRut() {
 		boolean ok = false;
 		int rut = 0;
 		while ( ok == false) {
 			Scanner pr = new Scanner(System.in);
-			rut = pr.nextInt();
-			if(rut > 999999999 && rut <11111111) {
-				System.out.println("Rut no puede estar vacio");
-				System.out.println("Ingresar RUT:");
-			} else { 
-				
-				ok = true;}
-		}
-		return rut;}		
+			boolean esDigito = false;
+			String rutS = pr.nextLine();
+			if(rutS.matches("[0-9]+") && rutS.length() >8){
+                esDigito = true;
+            }
+			if(esDigito) {
+				rut = Integer.parseInt(rutS);
+				if(rut > 11111111 && rut > 999999999) {
+					System.out.println("Rut no puede estar vacio");
+					System.out.println("Ingresar RUT:");
+				} else { 		
+					ok = true;
+				}
+			}
+			
+		} 
+		return rut;
+	}		
 	
 	//ingresar Nombre
 	public static String ingresarNombre() {
@@ -105,89 +98,142 @@ public class GestorUsuario {
 			nombre = pr.nextLine();
 			if(nombre == null || nombre.equals("")) {
 				System.out.println("Nombre no puede estar vacio");
-				System.out.println("Ingresar Nombre:");
+				System.out.print("Ingresar Nombre: ");
 			} else { 
 				
-				ok = true;}
+				ok = true;
+			}
 		}
-		return nombre;}
+		return nombre;
+	}
 		
 	//ingresar apellido
-		public static String ingresarApellido() {
-			boolean ok = false;
-			String apellido = null;
-			while ( ok == false) {
-				Scanner pr = new Scanner(System.in);
-				apellido = pr.nextLine();
-				if(apellido == null || apellido.equals("")) {
-					System.out.println("Apellido no puede estar vacio");
-					System.out.println("Ingresar Apellido:");
-				} else { 
-					
-					ok = true;}
+	public static String ingresarApellido() {
+		boolean ok = false;
+		String apellido = null;
+		while ( ok == false) {
+			Scanner pr = new Scanner(System.in);
+			apellido = pr.nextLine();
+			if(apellido == null || apellido.equals("")) {
+				System.out.println("Apellido no puede estar vacio");
+				System.out.print("Ingresar Apellido: ");
+			} else { 
+				ok = true;
 			}
-			return apellido;}
-		//ingresar Telefono
-				public static String ingresarTelefono() {
-					boolean ok = false;
-					String Fono = null;
-					while ( ok == false) {
-						Scanner pr = new Scanner(System.in);
-						Fono = pr.nextLine();
-						if(Fono == null || Fono.equals("") || Fono.length()<14) {
-							System.out.println("Telefono no puede estar vacio, debe maximo 15 caracteres");
-							System.out.println("Ingresar Telefono:");
-						} else { 
-							ok = true;}
-					}
-					return Fono;}
-				
-				public static long asignarTelefono() {
-					boolean ok = false;
-					long telefono = 0;
-					String Fono = ingresarTelefono();
-					telefono =Integer.parseInt(Fono);
-					return telefono;}
+		}
+		return apellido;
+		
+	}
+	//ingresar Telefono
+	public static String ingresarTelefono() throws IOException{
+        boolean ok = false;
+        String fono = null;
+        while (!ok) {
+            boolean largo = false;
+            boolean esDigito = false;
+            Scanner pr = new Scanner(System.in);
+            fono = pr.nextLine();
+            if(fono.matches("[0-9]+")){
+                esDigito = true;
+            }
+            if(fono.length() >8 && fono.length() <16){
+                largo = true;
+            }
+            ok = esDigito && largo;
+        }
+        return fono;
+    }
+
+	
 				
 				
 		//ingresar afp
-		public static String ingresarAfp() {
-			boolean ok = false;
-			String afp = null;
-			while ( ok == false) {
-				Scanner pr = new Scanner(System.in);
-				afp = pr.nextLine();
-				if(afp == null || afp.equals("")) {
-					System.out.println("Afp no puede estar vacio");
-					System.out.println("Ingresar Afp:");
-				} else { 
-					
-					ok = true;}
+	public static String ingresarAfp() {
+		boolean ok = false;
+		String afp = null;
+		while ( ok == false) {
+			Scanner pr = new Scanner(System.in);
+			afp = pr.nextLine();
+			if(afp == null || afp.equals("")) {
+				System.out.println("Afp no puede estar vacio");
+				System.out.print("Ingresar Afp: ");
+			} else { 
+				ok = true;
 			}
-			return afp;}
+		}
+		return afp;
+	}
 		
-		
-		//ingresar edad
-		public static String ingresarEdad() {
-			boolean ok = false;
-			String Edad = null;
-			while ( ok == false) {
-				Scanner pr = new Scanner(System.in);
-				int vEdad = pr.nextInt();
-				if(vEdad >119) {
-					System.out.println("Edad no puede estar vacio, no puede ser superior a 120");
-					System.out.println("Ingresar Telefono:");
-				} else {
-					
-					ok = true;}
+	//ingresar direccion
+	public static String ingresarDireccion() {
+		boolean ok = false;
+		String direccion = null;
+		while ( ok == false) {
+			Scanner pr = new Scanner(System.in);
+			direccion = pr.nextLine();
+			if(direccion == null || direccion.equals("") || direccion.length()>50) {
+				System.out.println("Apellido no puede estar vacio");
+				System.out.print("Ingresar Apellido: ");
+			} else { 
+				ok = true;
 			}
-			return Edad;}
+		}
+		return direccion;
+		
+	}			
 			
+	//ingresar apellido
+	public static String ingresarComuna() {
+		boolean ok = false;
+		String comuna = null;
+		while ( ok == false) {
+			Scanner pr = new Scanner(System.in);
+			comuna = pr.nextLine();
+			if(comuna == null || comuna.equals("")) {
+				System.out.println("Apellido no puede estar vacio");
+				System.out.print("Ingresar Apellido: ");
+			} else { 
+				ok = true;
+			}
+		}
+		return comuna;
+		
+	}
 			
-			
-
-			
-			
-			// 
+	public static int ingresarSisSal() {
+		boolean ok = false;
+		Integer sds = 0;
+		Integer[] tipos = {1,2};
+		while ( ok == false) {
+			Scanner pr = new Scanner(System.in);
+			sds = pr.nextInt();
+			if(!Arrays.asList(tipos).contains(sds) ) {
+				System.out.println("Sistema de salud no puede estar vacio, 1 Fonasa - 2 Isapre");
+				System.out.print("Ingresar Sistema de Salud: ");
+			} else {
+				ok = true;
+				
+			}
+		}
+		
+		return sds;
+	}		
+	//ingresar edad
+	public static int ingresarEdad() {
+		boolean ok = false;
+		int edad = 0;
+		while ( ok == false) {
+			Scanner pr = new Scanner(System.in);
+			edad = pr.nextInt();
+			if(edad >119) {
+				System.out.println("Edad no puede estar vacio, ni puede ser superior a 120");
+				System.out.print("Ingresar Edad: ");
+			} else {
+				ok = true;
+				pr.close();
+			}
+		}
+		return edad;
+	}
 
 }
