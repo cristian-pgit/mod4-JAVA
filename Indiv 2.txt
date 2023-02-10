@@ -1,0 +1,17 @@
+obtener respuestas de salida o Contacto cercano
+
+
+Si 
+	si salida 	= false
+	ContacCercano	= false
+Entonces
+	La persona no necesita hacerse un PCR ni guardar cuarentena
+
+------------------------------------
+
+Si 
+	si salida 	= true
+	ContacCercano	= false
+Entonces
+	La persona necesita si hacerse un PCR y guardar cuarentena
+
