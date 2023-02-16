@@ -26,6 +26,9 @@ public class Randomx1 {
 		
 		mensaje(a,b,c);
 		mensaje(d,f,g);
+		mensaje(d,a,f);
+		
+		mensaje2(d,f,g);
 		
 		System.out.println(suma(x,y));
 		System.out.println(suma(w,z));
@@ -37,6 +40,14 @@ public class Randomx1 {
 	
 	public static void mensaje(String a, String b, String c) {
 		System.out.println(a+" "+b+" "+c);
+		
+	}
+	
+	public static String mensaje2(String a, String b, String c) {
+		
+		String mensaje = a+b+c;
+		System.out.println(a+" "+b+" "+c);
+		return mensaje;
 		
 	}
 	
