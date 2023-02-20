@@ -1,0 +1,19 @@
+public static void recArray(String[][] userData, Scanner sc ) {
+		int i = 0;
+		boolean salida = false;
+		String salir = "";
+		while (!salida) {
+		    System.out.print("Desea continuar? (y/n): ");
+		    salir = sc.nextLine();
+		    if (salir.equals("y")) {
+		        for (i = 0; i < 100; i++) {
+		            registroUsuario(userData, sc, i);
+		            asignarPerfil(userData, sc, i);
+		        }
+		    } else if (isMinTipoPerfil(userData)) {
+		        salida = true;
+		    } else {
+		        System.out.println("no se cumple con el minimo de usuarios");
+		    }
+		}
+	}

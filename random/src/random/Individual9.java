@@ -62,8 +62,6 @@ public class Individual9 {
 			obtMasAlto(numeros);
 			obtMasBajo(numeros);
 			eliminarPares(numeros);
-			eliminarPares(numeros);
-			eliminarPares(numeros);
 			System.out.println("--Despues de eliminar pares--");
 			desplegarDatos(numeros);
 			promedio(numeros);
@@ -93,42 +91,45 @@ public class Individual9 {
 		
 		private static void promedio(List<Integer> numeros) {
 			 
-	        double avg = obtPromedio(numeros);
+	        double avg = obtPromedio(numeros)*100/100;
 	        System.out.println("El promedio es: " + avg);
 		}
 		
 		private static void obtMasAlto(List<Integer> numeros) {
 			 
-	      Collections.sort(numeros);
-	      
-	      for(int i=0;i<numeros.size();i++) {
-	    	  if(numeros.get(i)==null || numeros.size()<1){
-			    	System.out.println("No hay valor mas alto pues el array solo contiene 1 numero");
-			    } else {
-			    	System.out.println("El valor mas alto es: "+ numeros.get(numeros.size()-1));
-			    }
-	    	  }
+		      Collections.sort(numeros);
+		      int largo = numeros.size();
+		      if (largo>0) {
+		    	  int mayor = numeros.get(largo -1);
+		    	  System.out.println("El valor mas alto es: "+ mayor);
+		      } else {
+		    	  System.out.println("El arreglo se encuentra vacio");
+		      }
 		}
 		
 		private static void obtMasBajo(List<Integer> numeros) {
 			 
 		    Collections.sort(numeros);
-		      
-		    for(int i=0;i<numeros.size();i++) 
-		    if(numeros.get(i)==null || numeros.size()<1){
-		    	System.out.println("No hay valor mas bajo pues el array solo contiene 1 numero");
-		    } else {
-		    	System.out.println("El valor mas bajo es: "+ numeros.get(numeros.size()-2));  
-		    }
+		    int largo = numeros.size();
+		      if (largo>0) {
+		    	  int menor = numeros.get(0);
+		    	  System.out.println("El valor mas bajo es: "+ menor);
+		      } else {
+		    	  System.out.println("El arreglo se encuentra vacio");
+		      }
 		    		
 		}
 		     
 	      
 		private static void eliminarPares(List<Integer> numeros) {
-			for(int i=0;i<numeros.size();i++)	
-			if (numeros.get(i) % 2 == 0){
-				numeros.remove(i);
-			}
+			List<Integer> aux = new ArrayList<Integer>();
+			aux.addAll(numeros);
+			for(Integer a: aux) {
+				if (a % 2 == 0){
+					numeros.remove(a);
+				}
+			}	
+			
 		}
 		
 	

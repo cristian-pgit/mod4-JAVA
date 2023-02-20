@@ -1,0 +1,39 @@
+private static void eliminarUsuario(int filaAEliminar, String[][] dataUser, Scanner sc) {
+		boolean confirma= false;
+		String rune = "";
+		while (confirma) {
+			System.out.print("Ingrese el RUN del Usuario a eliminar (y/n): ");
+			rune = sc.nextLine();
+			if(rune.equals("y")) {
+				filaAEliminar = Integer.parseInt(rune);
+				int resto = 100 - (filaAEliminar+1);
+				String[][] auxiliar = new String[resto][10];
+				int contAuxiliar = 0;
+				for (int i= filaAEliminar+1; i<100; i++) {
+					for (int j=0; j<10; j++) {
+						auxiliar[contAuxiliar][j] = dataUser[i][j]; 
+					}
+					contAuxiliar++;
+				}
+				
+				contAuxiliar = 0;
+				
+				for (int i= filaAEliminar; i<100; i++) {
+					for (int j=0; j<10; j++) {
+						dataUser[i][j] = dataUser[contAuxiliar][j]; 
+					}
+					contAuxiliar++;
+				}
+				
+				for (int j=0; j<10; j++) {
+					dataUser[99][j] = null; 
+				}
+				confirma = true;
+			} else {
+				System.out.println("Run Incorrecto");
+				break;
+			}
+			
+		}
+
+	}
