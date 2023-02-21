@@ -1,0 +1,23 @@
+	public static void contarUsuariosPorCategoria(String[][] userData) {
+	    int numClientes = 0;
+	    int numProfesionales = 0;
+	    int numAdministrativos = 0;
+
+	    for (int i = 0; i < userData.length; i++) {
+	        if (userData[i][0] != null) { // Si el nombre está lleno, entonces hay un usuario en esta fila
+	            if (userData[i][2] != null && userData[i][3] != null) { // Si los campos de dirección y teléfono están llenos, entonces es un cliente
+	                numClientes++;
+	            } else if (userData[i][5] != null) { // Si el campo de departamento está lleno, entonces es un profesional
+	                numProfesionales++;
+	            } else if (userData[i][6] != null) { // Si el campo de función está lleno, entonces es un administrativo
+	                numAdministrativos++;
+	            }
+	        }
+	    }
+
+	    System.out.println("Resumen de usuarios:");
+	    System.out.println("Clientes: " + numClientes);
+	    System.out.println("Profesionales: " + numProfesionales);
+	    System.out.println("Administrativos: " + numAdministrativos);
+	}
+	

@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author diurno
- *
- */
-module random {
-}
