@@ -1,0 +1,27 @@
+	public String obtenerNombre(String nombres, String apellidos) {
+		return nombres + " " + apellidos;
+	}
+	
+	public void obtenerSds (int sds) {
+		if (sds == 1) {
+			System.out.println("Su Sistema de Salud es Fonasa");
+		} else {
+			System.out.println("Su Sistema de Salud es Isapre");
+		}
+	}
+
+
+
+cliente2.setRut(222222222);
+        cliente2.setNombres("Lola ");
+        cliente2.setApellidos("Mento");
+        cliente2.setTelefono("12341235");
+        cliente2.setAfp("Habitat");
+        cliente2.setSds(2);
+        cliente2.setDireccion("Los Ricachones");
+        cliente2.setComuna("Las Condes");
+        cliente2.setEdad(45);
+
+
+	System.out.println("Cliente 1: Nombre Completo es: "+cliente1.getNombres()+ cliente1.getApellidos() +" su telefono es:"+cliente1.getTelefono()+" su AFP es: "+cliente1.getAfp()+" y "+cliente1.obtenerSds(cliente1.getSds())
+		+" su Direccion es: " + cliente1.getDireccion() + " su comuna es: "+cliente1.getComuna()+ " y su edad es: "+cliente1.getEdad());
