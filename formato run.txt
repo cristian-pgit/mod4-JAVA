@@ -1,0 +1,15 @@
+	public static String formatoRun(Scanner sc) {
+		boolean ok = false;
+		String run = "";
+		while (!ok) {
+			System.out.print("Ingrese RUN: ");
+	        String rune = sc.nextLine();
+	        if(rune.matches("^\\d{8}-[\\dKk]$")) {
+	        	ok = true;
+	        	run = rune;
+		    } else {
+	        	System.out.println("Run Incorrecto, respete el formato 00000000-X");
+	        }  
+		}
+		return run;
+	}

@@ -1,0 +1,84 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class EggAttackGame {
+    private static final int ROWS = 15;
+    private static final int COLS = 15;
+    private static final int KROMI_SIZE = 3;
+    private static final int CAGUANO_SIZE = 2;
+    private static final int TRUPALLA_SIZE = 1;
+
+    private static final char KROMI_CHAR = 'K';
+    private static final char CAGUANO_CHAR = 'C';
+    private static final char TRUPALLA_CHAR = 'T';
+    private static final char EGG_CHAR = 'H';
+
+    private static final int KROMI_POINTS = 3;
+    private static final int CAGUANO_POINTS = 2;
+    private static final int TRUPALLA_POINTS = 1;
+    private static final int KROMI_DESTROYED_POINTS = 10;
+    private static final int CAGUANO_DESTROYED_POINTS = 7;
+
+    private static final Random random = new Random();
+
+    private static List<Carro> pks = new ArrayList<Carro>(18);
+
+    public static void main(String[] args) {
+        // Inicializar la matriz
+        char[][] matrix = new char[ROWS][COLS];
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                matrix[i][j] = ' ';
+            }
+        }
+
+        // Agregar los vehículos de forma aleatoria
+        agregarKromis(matrix);
+        agregarCaguanos(matrix);
+        agregarTrupallas(matrix);
+
+        // Mostrar la matriz inicial
+        mostrarMatriz(matrix);
+
+        // Jugar hasta que se hayan destruido todos los vehículos
+        int totalPoints = 0;
+        while (!pks.isEmpty()) {
+            int row = pedirFila();
+            int col = pedirColumna();
+            if (matrix[row][col] == ' ') {
+                System.out.println("Huevo fallido!");
+            } else if (matrix[row][col] == EGG_CHAR) {
+                System.out.println("Ya lanzaste un huevo en esa posición!");
+            } else {
+                Carro carro = destruirVehiculo(matrix, row, col);
+                if (carro == null) {
+                    System.out.println("Huevo fallido!");
+                } else {
+                    int points = calcularPuntos(carro);
+                    System.out.printf("Destruiste un vehículo (%d puntos)!\n", points);
+                    totalPoints += points;
+                }
+            }
+        }
+
+        // Mostrar el puntaje total
+        System.out.printf("Puntaje total: %d\n", totalPoints);
+    }
+
+    private static void agregarKromis(char[][] matrix) {
+        for (int i = 0; i < 3; i++) {
+            int row = random.nextInt(ROWS - KROMI_SIZE + 1);
+            int col = random.nextInt(COLS);
+            while (!validarPosicion(matrix, row, col, KROMI_SIZE)) {
+                row = random.nextInt(ROWS - KROMI_SIZE + 1);
+                col = random.nextInt(COLS);
+            }
+            for (int j = 0; j < KROMI_SIZE; j++) {
+                matrix[row + j][col] = KROMI_CHAR;
+            }
+            pks.add(new Carro(row, col, KROMI_SIZE));
+        }
+    }
+
+    private static void agregarCaguanos(char[][] matrix) {

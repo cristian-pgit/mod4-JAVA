@@ -1,0 +1,74 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class EggAttackGame {
+    private static final int ROWS = 15;
+    private static final int COLS = 15;
+    private static final int KROMI_SIZE = 3;
+    private static final int CAGUANO_SIZE = 2;
+    private static final int TRUPALLA_SIZE = 1;
+    private static final char KROMI_SYMBOL = 'K';
+    private static final char CAGUANO_SYMBOL = 'C';
+    private static final char TRUPALLA_SYMBOL = 'T';
+    private static final char EGG_SYMBOL = 'H';
+    private static final int KROMI_POINTS = 3;
+    private static final int CAGUANO_POINTS = 2;
+    private static final int TRUPALLA_POINTS = 1;
+    private static final int KROMI_BONUS_POINTS = 10;
+    private static final int CAGUANO_BONUS_POINTS = 7;
+    
+    private static final Random random = new Random();
+    private static final Scanner scanner = new Scanner(System.in);
+    
+    private static final List<Carro> pks = new ArrayList<Carro>(18);
+    
+    public static void main(String[] args) {
+        generarPKS();
+        char[][] matriz = generarMatriz();
+        imprimirMatriz(matriz);
+        int puntaje = 0;
+        while (true) {
+            int fila = pedirFila();
+            int columna = pedirColumna();
+            if (fila < 0 || fila >= ROWS || columna < 0 || columna >= COLS) {
+                System.out.println("Coordenadas inválidas. Intente de nuevo.");
+                continue;
+            }
+            if (matriz[fila][columna] == EGG_SYMBOL) {
+                System.out.println("Ya ha lanzado un huevo en esta posición. Intente de nuevo.");
+                continue;
+            }
+            char symbol = matriz[fila][columna];
+            if (symbol == KROMI_SYMBOL) {
+                matriz[fila][columna] = EGG_SYMBOL;
+                matriz[fila+1][columna] = EGG_SYMBOL;
+                matriz[fila+2][columna] = EGG_SYMBOL;
+                puntaje += KROMI_POINTS;
+                if (esKromiInutilizada(matriz, fila, columna)) {
+                    puntaje += KROMI_BONUS_POINTS;
+                }
+            } else if (symbol == CAGUANO_SYMBOL) {
+                matriz[fila][columna] = EGG_SYMBOL;
+                matriz[fila][columna+1] = EGG_SYMBOL;
+                puntaje += CAGUANO_POINTS;
+                if (esCaguanoInutilizado(matriz, fila, columna)) {
+                    puntaje += CAGUANO_BONUS_POINTS;
+                }
+            } else if (symbol == TRUPALLA_SYMBOL) {
+                matriz[fila][columna] = EGG_SYMBOL;
+                puntaje += TRUPALLA_POINTS;
+            }
+            imprimirMatriz(matriz);
+            System.out.println("Puntaje: " + puntaje);
+        }
+    }
+    
+    private static void generarPKS() {
+        for (int i = 0; i < 3; i++) {
+            int fila = random.nextInt(ROWS - KROMI_SIZE + 1);
+            int columna = random.nextInt(COLS);
+            pks.add(new Kromi(fila, columna));
+        }
+        for (int i = 0; i < 5; i++) {
+            int fila = random.nextInt(ROWS

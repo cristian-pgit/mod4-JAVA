@@ -1,0 +1,40 @@
+List<Carro> pks = new ArrayList<Carro>();
+
+// Crear 3 Kromis
+for (int i = 0; i < 3; i++) {
+    int row = getRandomNumberInRange(0, ROWS - KROMI_SIZE);
+    int col = getRandomNumberInRange(0, COLS - 1);
+    Carro kromi = new Kromi(row, col);
+    while (checkCollision(kromi, pks)) {
+        row = getRandomNumberInRange(0, ROWS - KROMI_SIZE);
+        col = getRandomNumberInRange(0, COLS - 1);
+        kromi = new Kromi(row, col);
+    }
+    pks.add(kromi);
+}
+
+// Crear 5 Caguanos
+for (int i = 0; i < 5; i++) {
+    int row = getRandomNumberInRange(0, ROWS - 1);
+    int col = getRandomNumberInRange(0, COLS - CAGUANO_SIZE);
+    Carro caguano = new Caguano(row, col);
+    while (checkCollision(caguano, pks)) {
+        row = getRandomNumberInRange(0, ROWS - 1);
+        col = getRandomNumberInRange(0, COLS - CAGUANO_SIZE);
+        caguano = new Caguano(row, col);
+    }
+    pks.add(caguano);
+}
+
+// Crear 10 Trupallas
+for (int i = 0; i < 10; i++) {
+    int row = getRandomNumberInRange(0, ROWS - 1);
+    int col = getRandomNumberInRange(0, COLS - 1);
+    Carro trupalla = new Trupalla(row, col);
+    while (checkCollision(trupalla, pks)) {
+        row = getRandomNumberInRange(0, ROWS - 1);
+        col = getRandomNumberInRange(0, COLS - 1);
+        trupalla = new Trupalla(row, col);
+    }
+    pks.add(trupalla);
+}

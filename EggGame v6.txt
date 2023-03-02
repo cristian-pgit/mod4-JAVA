@@ -1,0 +1,85 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
+public class EggAttackGame {
+    private static final int ROWS = 15;
+    private static final int COLS = 15;
+    private static final int KROMI_SIZE = 3;
+    private static final int CAGUANO_SIZE = 2;
+    private static final int TRUPALLA_SIZE = 1;
+
+    private static final char KROMI_SYMBOL = 'K';
+    private static final char CAGUANO_SYMBOL = 'C';
+    private static final char TRUPALLA_SYMBOL = 'T';
+    private static final char HIT_SYMBOL = 'H';
+
+    private static final int KROMI_POINTS = 3;
+    private static final int CAGUANO_POINTS = 2;
+    private static final int TRUPALLA_POINTS = 1;
+    private static final int KROMI_BONUS_POINTS = 10;
+    private static final int CAGUANO_BONUS_POINTS = 7;
+
+    private static final Random RANDOM = new Random();
+
+    public static void main(String[] args) {
+        List<Carro> pks = new ArrayList<Carro>(18);
+
+        // Agregar Kromis
+        for (int i = 0; i < 3; i++) {
+            int row = getRandomRow();
+            int col = getRandomCol();
+            while (!isValidPosition(row, col) || isOverlapping(pks, row, col, KROMI_SIZE)) {
+                row = getRandomRow();
+                col = getRandomCol();
+            }
+            for (int j = 0; j < KROMI_SIZE; j++) {
+                pks.add(new Carro(row + j, col, KROMI_SYMBOL));
+            }
+        }
+
+        // Agregar Caguanos
+        for (int i = 0; i < 5; i++) {
+            int row = getRandomRow();
+            int col = getRandomCol();
+            while (!isValidPosition(row, col) || isOverlapping(pks, row, col, CAGUANO_SIZE)) {
+                row = getRandomRow();
+                col = getRandomCol();
+            }
+            for (int j = 0; j < CAGUANO_SIZE; j++) {
+                pks.add(new Carro(row, col + j, CAGUANO_SYMBOL));
+            }
+        }
+
+        // Agregar Trupallas
+        for (int i = 0; i < 10; i++) {
+            int row = getRandomRow();
+            int col = getRandomCol();
+            while (!isValidPosition(row, col) || isOverlapping(pks, row, col, TRUPALLA_SIZE)) {
+                row = getRandomRow();
+                col = getRandomCol();
+            }
+            pks.add(new Carro(row, col, TRUPALLA_SYMBOL));
+        }
+
+        // Mostrar la matriz inicial
+        char[][] matrix = createMatrix(pks);
+        System.out.println("Matriz inicial:");
+        printMatrix(matrix);
+
+        // Jugar
+        Scanner scanner = new Scanner(System.in);
+        int score = 0;
+        while (true) {
+            System.out.print("Ingrese fila: ");
+            int row = scanner.nextInt();
+            System.out.print("Ingrese columna: ");
+            int col = scanner.nextInt();
+            if (!isValidPosition(row, col)) {
+                System.out.println("Posición inválida, intente de nuevo.");
+                continue;
+            }
+            char symbol = getSymbolAtPosition(matrix, row, col);
+            if (symbol == 0) {
+                matrix[row][col] = HIT_SYMBOL;
